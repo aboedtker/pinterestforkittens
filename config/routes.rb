@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :pins
+
   #get 'page/index'
   root 'page#index'
   #get 'page/about'
