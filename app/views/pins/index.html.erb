@@ -1,5 +1,19 @@
-<h1>Listing pins</h1>
 
+<% if !user_signed_in? %>
+<div class="jumbotron">
+      <div class="container">
+        <h1>Welcome to Pinterest for Kittens</h1>
+          <p>
+    <a class="btn btn-primary btn-lg" role="button" href="/users/sign_in"> <span class="glyphicon glyphicon-log-in"></span> Sign in</a> 
+
+    <a class="btn btn-danger btn-lg" role="button" href="/users/sign_up"> <span class="glyphicon glyphicon-new-window"></span> Sign up</a>
+  </p>
+      </div>
+    </div>
+ <% end %>
+    <% if user_signed_in? %>
+<h1>Your Pins</h1>
+ 
 <table class="table table-striped">
   <thead>
     <tr>
@@ -23,3 +37,4 @@
 <br>
 
 <%= link_to 'New Pin', new_pin_path %>
+<% end %>

@@ -1,4 +1,7 @@
 <div class="jumbotron">
+ <% if user_signed_in? %>
+  <%= current_user.email %>
+  <% end %>
   <h1>We all love kittens</h1>
   <p>But I <i>just don't know</i> where to find them on the <b>internet</b>.</p>
   <p>
