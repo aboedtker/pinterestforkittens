@@ -1,18 +1,18 @@
 
 <% if !user_signed_in? %>
-<div class="jumbotron">
-      <div class="container">
-        <h1>Welcome to Pinterest for Kittens</h1>
-          <p>
-    <a class="btn btn-primary btn-lg" role="button" href="/users/sign_in"> <span class="glyphicon glyphicon-log-in"></span> Sign in</a> 
 
-    <a class="btn btn-danger btn-lg" role="button" href="/users/sign_up"> <span class="glyphicon glyphicon-new-window"></span> Sign up</a>
+<div class="jumbotron">
+  <h1>We all love kittens</h1>
+  <p>But I <i>just don't know</i> where to find them on the <b>internet</b>.</p>
+  <p>
+    <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+    <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary btn-lg" %>
   </p>
-      </div>
-    </div>
- <% end %>
-    <% if user_signed_in? %>
-<h1>Your Pins</h1>
+</div>
+
+<% end %>
+   
+<h1>Listing Pins</h1>
  
 <table class="table table-striped">
   <thead>
@@ -26,9 +26,15 @@
     <% @pins.each do |pin| %>
       <tr>
         <td><%= pin.description %></td>
+        <td><%= time_ago_in_words pin.created_at %></td>
+         <td><%= pin.user.try( :email ) %></td>
+         <% if current_user == pin.user %>
         <td><%= link_to 'Show', pin %></td>
         <td><%= link_to 'Edit', edit_pin_path(pin) %></td>
         <td><%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+        <td></td><td></td><td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -36,5 +42,6 @@
 
 <br>
 
-<%= link_to 'New Pin', new_pin_path %>
+<% if user_signed_in? %>
+<%= link_to 'New Pin', new_pin_path, class: "btn btn-primary btn-lg" %>
 <% end %>
